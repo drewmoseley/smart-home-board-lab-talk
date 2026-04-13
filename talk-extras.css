@@ -1,0 +1,94 @@
+/* talk-extras.css — talk-specific styles for smart-home-board-lab-talk
+   Loaded after infra/custom.css via the EXTRA_CSS mechanism. */
+
+/* ================================================================
+   Title slide
+   ================================================================ */
+
+.reveal #title-slide {
+  background-color: white !important;
+  padding: 0 !important;
+}
+
+/* Green accent strip at bottom */
+.reveal #title-slide::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 18px;
+  background: var(--toradex-green);
+}
+
+/* Reset infra's 40% max-width on all children */
+.reveal #title-slide > * {
+  max-width: none !important;
+}
+
+/* ---- Logo bar ---- */
+.reveal #title-slide .title-logos {
+  position: absolute !important;
+  top: 0; left: 0; right: 0;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  padding: 16px 60px !important;
+  border-bottom: 1px solid #e0e0e0 !important;
+  margin-top: 0 !important;
+  box-sizing: border-box !important;
+}
+
+.reveal #title-slide .title-logos img { height: 44px !important; width: auto !important; }
+
+/* ---- Main title ---- */
+.reveal #title-slide h1 {
+  position: absolute !important;
+  top: 160px; left: 110px; right: 10%;
+  font-size: 2.8em !important;
+  font-weight: 700 !important;
+  line-height: 1.25 !important;
+  margin: 0 !important;
+}
+
+/* ---- Presenter block ---- */
+.reveal #title-slide p.author {
+  position: absolute !important;
+  bottom: 60px; left: 110px;
+  display: flex !important;
+  align-items: center !important;
+  gap: 20px !important;
+  max-width: 60% !important;
+  font-size: 1.0em !important;
+  line-height: 1.6 !important;
+  color: var(--color-text) !important;
+  margin: 0 !important;
+}
+
+.reveal #title-slide p.author img {
+  width: 90px !important;
+  height: 90px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  flex-shrink: 0 !important;
+}
+
+.reveal #title-slide p.author small {
+  display: block !important;
+  font-size: 0.75em !important;
+  color: #888 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+}
+
+.reveal #title-slide p.author strong {
+  display: block !important;
+  font-size: 1.1em !important;
+  color: var(--toradex-blue) !important;
+}
+
+.reveal #title-slide p.date {
+  position: absolute !important;
+  bottom: 36px; left: 110px;
+  font-size: 0.85em !important;
+  color: #888 !important;
+  margin: 0 !important;
+}
