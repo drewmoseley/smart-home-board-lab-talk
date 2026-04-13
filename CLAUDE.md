@@ -53,7 +53,7 @@ img/
 ## Companion blog post
 
 "Embedded Linux Board Farms 101: The Requirements That Actually Matter"
-Published: April 2, 2026 — https://www.embeddedrelated.com/showarticle/1782.php
+Published: April 2, 2026 — <https://www.embeddedrelated.com/showarticle/1782.php>
 
 This post is a teaser/prerequisite for the talk. Key points it establishes:
 
@@ -67,6 +67,15 @@ This post is a teaser/prerequisite for the talk. Key points it establishes:
 - Home Assistant + Tasmota are mentioned as the "smart home integration" layer
 
 The talk goes deeper on the HA/Tasmota/automation angle that the post introduces briefly.
+
+---
+
+## Memory
+
+Claude memory for this project lives in `.claude/memory/` within the repo (not in
+`~/.claude/projects/`). This keeps it portable across machines via SyncThing.
+Always read from and write memory to `.claude/memory/MEMORY.md` and
+`.claude/memory/*.md`.
 
 ---
 
