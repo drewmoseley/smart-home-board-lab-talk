@@ -1,9 +1,3 @@
----
-
-## Physical Design {.section-title}
-
----
-
 ## Self-Contained Board Units
 
 Size constraints drove a key design decision: **each board lives in its own unit** with a single power, ethernet, and USB connection to the outside world.

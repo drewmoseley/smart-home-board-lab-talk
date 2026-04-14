@@ -1,7 +1,3 @@
-## Cost-Effective Alternatives {.section-title}
-
----
-
 ## What This Replaces (and What It Costs)
 
 | Lab Capability | Enterprise Tool | Home Lab Alternative | Approx. Cost |

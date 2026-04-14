@@ -1,7 +1,3 @@
-## Home Assistant {.section-title}
-
----
-
 ## Why Home Assistant?
 
 :::: {.slide-columns}

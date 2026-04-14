@@ -1,9 +1,3 @@
----
-
-## Build Infrastructure {.section-title}
-
----
-
 ## My Lab Machines
 
 - **NUC-style PC (Ubuntu)** — always-on Docker host; runs Home Assistant and supporting services

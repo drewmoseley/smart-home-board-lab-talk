@@ -1,9 +1,3 @@
----
-
-## Other Considerations {.section-title}
-
----
-
 ## Beyond the Core Setup
 
 Depending on your needs, you might also care about:

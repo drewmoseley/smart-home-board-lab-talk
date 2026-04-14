@@ -1,9 +1,3 @@
----
-
-## Scripted Workflows {.section-title}
-
----
-
 ## Simple Shell Glue
 
 This is a **personal dev farm** — not a replacement for a full automated test lab.

@@ -1,7 +1,3 @@
-## Board Access {.section-title}
-
----
-
 ## The Board Farm Controller
 
 **Raspberry Pi 5** — the physical hub of the lab

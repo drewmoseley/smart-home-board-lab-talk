@@ -1,7 +1,3 @@
-## Wrap-Up {.section-title}
-
----
-
 ## Before and After
 
 <div class="wrapup-layout">

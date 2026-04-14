@@ -1,9 +1,3 @@
----
-
-## Goals for This Lab {.section-title}
-
----
-
 ## What We're Optimizing For
 
 - **Low cost** — maker/hobbyist hardware: Raspberry Pi, cheap smart plugs, USB adapters
