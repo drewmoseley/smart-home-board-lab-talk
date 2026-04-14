@@ -2,6 +2,19 @@
    Loaded after infra/custom.css via the EXTRA_CSS mechanism. */
 
 /* ================================================================
+   Hardware design slide
+   ================================================================ */
+
+#self-contained-board-units .slide-col-left img,
+#self-contained-board-units .slide-col-right img {
+  width: 100% !important;
+  max-height: 72vh !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 0 0.5em 0 !important;
+}
+
+/* ================================================================
    Title slide
    ================================================================ */
 

@@ -6,25 +6,18 @@
 
 ## Self-Contained Board Units
 
-Size constraints drove a key design decision: **each board lives in its own unit**
-with a single power, ethernet, and USB connection to the outside world.
+Size constraints drove a key design decision: **each board lives in its own unit** with a single power, ethernet, and USB connection to the outside world.
 
 :::: {.slide-columns}
 ::: {.slide-col-left}
-**Inside each unit:**
-
-- The target board
-- Relay board (Tasmota) — power + recovery mode control
-- USB hub — serial adapters, storage, peripherals
-- Ethernet switch — single uplink to the lab network
-- Buck converters — step down from a single 10W+ laptop PSU
-
-**One cable in, everything powered and connected.**
+![Boards mounted in unit](img/board-farm-top.png)
 :::
 ::: {.slide-col-right}
-<!-- photo goes here -->
+![Power and wiring layer](img/board-farm-guts.png)
 :::
 ::::
+
+**Inside each unit:** target board, relay board (Tasmota), USB hub, ethernet switch, buck converters from a single 10W+ laptop PSU.
 
 ::: notes
 The single-PSU + buck converter approach keeps cabling tidy and makes each
