@@ -1,4 +1,4 @@
-I'm get## Power Control with Tasmota {.section-title}
+## Power Control with Tasmota {.section-title}
 
 ---
 

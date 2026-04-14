@@ -49,16 +49,4 @@ Toradex boards running TorizonCore can publish MQTT metrics out of the box with 
 
 ## Home Assistant Dashboard: Lab View
 
-<!-- placeholder for screenshot/diagram -->
-<div class="arch-diagram">
-  <div class="arch-outer">
-    <div class="arch-outer-label">Home Assistant</div>
-    <div class="arch-services">
-      <div class="arch-box">Board Sensors<small>MQTT</small></div>
-      <div class="arch-arrow"><span>feeds</span><span class="arch-shaft">→</span></div>
-      <div class="arch-box">Dashboard<small>Lovelace</small></div>
-      <div class="arch-arrow"><span>triggers</span><span class="arch-shaft">→</span></div>
-      <div class="arch-box">Automations<small>scripts / alerts</small></div>
-    </div>
-  </div>
-</div>
+![Home Assistant lab dashboard — board power switches, recovery mode toggles, Tasmota energy monitoring](img/homeassistant.png)
