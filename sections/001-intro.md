@@ -17,18 +17,6 @@ This talk is the how-to. Let's build it.
 
 <p class="slide-footnote"><sup>1</sup> embeddedrelated.com/showarticle/1782.php</p>
 
----
-
-## What We'll Cover
-
-- **Serial console access** — UART, ser2net, udev stable names
-- Integrating boards with **Home Assistant** for monitoring and automation
-- **Tasmota** smart switches for remote power cycling and automated testing
-- **HVAC / environmental** monitoring for temperature-sensitive hardware
-- **Proxmox** virtualization alongside home automation
-- Practical automations that improve your dev workflow
-- Cost-effective alternatives to expensive lab equipment
-
 ::: notes
 Set expectations: this is a production setup I actually run, not a demo project.
 The blog post covers the "why" — this talk is the "how."
