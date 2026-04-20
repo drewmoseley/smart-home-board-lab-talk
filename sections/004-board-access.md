@@ -140,15 +140,3 @@ Serial gives you the console — but sometimes you need the **display output** (
 - Used for TEZI installer UI, BIOS/UEFI, early boot issues
 - Any board's display reachable locally or remotely — no cable moves
 
----
-
-## Serial Console in Home Assistant
-
-- `ser2net` TCP ports → HA terminal card or REST sensor
-- Log serial output to files → searchable later
-- Alert on keywords in serial stream: `"kernel panic"`, `"Oops"`, `"reboot"`
-- Correlate serial events with power events (Tasmota) on a timeline
-
-::: notes
-This closes the loop — serial console isn't just a manual debug tool, it feeds data back into the automation system.
-:::

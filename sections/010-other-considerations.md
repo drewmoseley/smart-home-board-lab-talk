@@ -9,6 +9,7 @@ Depending on your needs, you might also care about:
 - **MCU boards** — JTAG/SWD debug probes, different power cycling strategies
 - **Full CI integration** — webhook → power cycle → flash → test → report; same primitives, more pipeline
 - **Remote serial alternatives** — `ser2net` or `socat` (TCP port per UART), `usbip` (expose USB devices over the network) if SSH-based access doesn't fit your workflow
+- **Serial console in HA** — pipe `ser2net` output to HA sensors, alert on keywords like `"kernel panic"`, correlate serial events with power events on a timeline
 
 ::: notes
 These didn't make the main flow but are worth mentioning so attendees know
