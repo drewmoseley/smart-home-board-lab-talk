@@ -6,16 +6,32 @@
 
 ## Your Dev Environment Shouldn't End at Your Desk
 
-The requirements for a real board lab boil down to four things:<sup>1</sup>
-
-- **Out-of-band console** — a connection that survives broken networking, kernels, bootloaders
-- **Remote power control** — power cycle and control boot mode without being there
-- **Scripted reimaging** — automated, repeatable provisioning from a known baseline
-- **Logging and inspection** — shift from interactive debugging to artifact review
-
-This talk is the how-to. Let's build it.
-
+```{=html}
+<div class="req-grid">
+  <div class="req-card">
+    <span class="req-num">01</span>
+    <strong>Out-of-Band Console</strong>
+    <p>Survives broken networking, kernels, and bootloaders</p>
+  </div>
+  <div class="req-card">
+    <span class="req-num">02</span>
+    <strong>Remote Power Control</strong>
+    <p>Cycle power and control boot mode without being there</p>
+  </div>
+  <div class="req-card">
+    <span class="req-num">03</span>
+    <strong>Scripted Reimaging</strong>
+    <p>Automated, repeatable provisioning from a known baseline</p>
+  </div>
+  <div class="req-card">
+    <span class="req-num">04</span>
+    <strong>Logging &amp; Inspection</strong>
+    <p>Shift from interactive debugging to artifact review</p>
+  </div>
+</div>
+<p class="slide-tagline">This talk is the how-to. Let's build it.</p>
 <p class="slide-footnote"><sup>1</sup> embeddedrelated.com/showarticle/1782.php</p>
+```
 
 ::: notes
 Set expectations: this is a production setup I actually run, not a demo project.
