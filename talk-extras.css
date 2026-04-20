@@ -2,6 +2,105 @@
    Loaded after infra/custom.css via the EXTRA_CSS mechanism. */
 
 /* ================================================================
+   Requirement cards — "Your Dev Environment" slide
+   ================================================================ */
+
+.req-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 1.2em;
+  margin: 0.6em 0 0.8em;
+  min-height: 52vh;
+}
+
+.req-card {
+  border-left: 6px solid var(--toradex-blue);
+  background: var(--toradex-grey);
+  padding: 1.4em 1.5em;
+  border-radius: 0 8px 8px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.req-num {
+  display: block;
+  font-size: 0.75em;
+  font-weight: 700;
+  color: var(--toradex-green);
+  letter-spacing: 0.12em;
+  margin-bottom: 0.35em;
+}
+
+.req-card strong {
+  display: block;
+  font-size: 1.15em;
+  color: var(--toradex-blue);
+  margin-bottom: 0.35em;
+}
+
+.req-card p {
+  font-size: 0.9em;
+  color: #555;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.slide-tagline {
+  font-size: 1.05em;
+  font-weight: 600;
+  color: var(--toradex-blue);
+  margin: 0.3em 0 0;
+}
+
+/* ================================================================
+   Goal tiles — "What We're Optimizing For" slide
+   ================================================================ */
+
+.goal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.4em;
+  margin: 0.8em 0 1.2em;
+  min-height: 42vh;
+}
+
+.goal-card {
+  border-top: 6px solid var(--toradex-green);
+  background: var(--toradex-grey);
+  padding: 1.6em 1.2em;
+  border-radius: 0 0 8px 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.goal-label {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: var(--toradex-blue);
+  margin-bottom: 0.5em;
+}
+
+.goal-desc {
+  font-size: 0.85em;
+  color: #555;
+  line-height: 1.5;
+}
+
+.scope-note {
+  background: #eef3f8;
+  border-left: 6px solid var(--toradex-blue);
+  padding: 0.9em 1.3em;
+  font-size: 0.88em;
+  border-radius: 0 6px 6px 0;
+  color: #444;
+  line-height: 1.5;
+}
+
+/* ================================================================
    Hardware design slide
    ================================================================ */
 
@@ -50,7 +149,7 @@
   box-sizing: border-box !important;
 }
 
-.reveal #title-slide .title-logos img { height: 44px !important; width: auto !important; }
+.reveal #title-slide .title-logos img { height: 72px !important; width: auto !important; }
 
 /* ---- Main title ---- */
 .reveal #title-slide h1 {
