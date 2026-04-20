@@ -110,6 +110,73 @@
 }
 
 /* ================================================================
+   Simple Shell Glue slide
+   ================================================================ */
+
+.shell-glue-codewindow pre {
+  font-size: 1.15em !important;
+  line-height: 1.8 !important;
+}
+
+/* Pull numberLines numbers inside the dark code box */
+.shell-glue-codewindow pre.numberSource {
+  margin-left: 0 !important;
+  border-left: none !important;
+  padding-left: 3.5em !important;
+}
+
+.shell-glue-codewindow pre.numberSource code > span {
+  left: -3.5em !important;
+}
+
+.shell-glue-codewindow pre.numberSource code > span > a:first-child::before {
+  width: 2.5em !important;
+  background-color: transparent !important;
+  color: #586e75 !important;
+  border-right: 1px solid #586e75 !important;
+  margin-right: 0.5em !important;
+}
+
+.shell-glue-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.shell-step {
+  display: flex;
+  flex-direction: column;
+  border-left: 5px solid var(--toradex-blue);
+  background: var(--toradex-grey);
+  padding: 0.7em 1em;
+  border-radius: 0 6px 6px 0;
+  flex: 1;
+  justify-content: center;
+  margin-bottom: 0.6em;
+}
+
+.shell-step:last-child { margin-bottom: 0; }
+
+.shell-step-num {
+  font-size: 0.65em;
+  font-weight: 700;
+  color: var(--toradex-green);
+  letter-spacing: 0.12em;
+}
+
+.shell-step strong {
+  display: block;
+  font-size: 1em;
+  color: var(--toradex-blue);
+  margin: 0.1em 0;
+}
+
+.shell-step span:not(.shell-step-num) {
+  font-size: 0.82em;
+  color: #555;
+}
+
+/* ================================================================
    My Lab Machines slide
    ================================================================ */
 
