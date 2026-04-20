@@ -110,6 +110,33 @@
 }
 
 /* ================================================================
+   Beyond the Core Setup — chip/badge layout
+   ================================================================ */
+
+.beyond-chips {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2em;
+  margin: 1.2em 0 0;
+  min-height: 58vh;
+}
+
+.beyond-chip {
+  background: var(--toradex-grey);
+  border: 3px solid var(--toradex-blue);
+  border-radius: 999px;
+  padding: 0 1.5em;
+  font-size: 1.15em;
+  font-weight: 600;
+  color: var(--toradex-blue);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 0.5em;
+}
+
+/* ================================================================
    Tips for Getting Started — horizontal timeline
    ================================================================ */
 
