@@ -1,14 +1,29 @@
 ## What We're Optimizing For
 
-- **Low cost** — maker/hobbyist hardware: Raspberry Pi, cheap smart plugs, USB adapters
-- **Minimum physical space** — fits on a shelf, not a server rack
-- **Remote access** — fully operable when you're not at home
-- **Expandable** — add boards, sensors, and automations incrementally
-
-### Scope: SBCs running Linux
-
-This setup is designed for **single-board computers running Linux** (Toradex, Raspberry Pi, BeagleBone, etc.).
-MCU-based boards have different constraints — some of this applies, but your mileage may vary.
+```{=html}
+<div class="goal-grid">
+  <div class="goal-card">
+    <div class="goal-label">Low Cost</div>
+    <div class="goal-desc">Raspberry Pi, cheap smart plugs, USB serial adapters</div>
+  </div>
+  <div class="goal-card">
+    <div class="goal-label">Minimum Space</div>
+    <div class="goal-desc">Fits on a shelf, not a server rack</div>
+  </div>
+  <div class="goal-card">
+    <div class="goal-label">Remote Access</div>
+    <div class="goal-desc">Fully operable when you're not at home</div>
+  </div>
+  <div class="goal-card">
+    <div class="goal-label">Expandable</div>
+    <div class="goal-desc">Add boards, sensors, and automations incrementally</div>
+  </div>
+</div>
+<div class="scope-note">
+  <strong>Scope: SBCs running Linux</strong> — Toradex, Raspberry Pi, BeagleBone, etc.
+  MCU boards have different constraints — some of this applies, but your mileage may vary.
+</div>
+```
 
 ::: notes
 Frame the design philosophy before diving into tools. This isn't enterprise
