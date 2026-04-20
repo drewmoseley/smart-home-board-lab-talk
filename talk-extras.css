@@ -2,6 +2,15 @@
    Loaded after infra/custom.css via the EXTRA_CSS mechanism. */
 
 /* ================================================================
+   Solarized Dark code block colors (overrides infra Monokai defaults)
+   ================================================================ */
+
+:root {
+  --color-code-dark-bg: #002b36;
+  --color-code-dark-fg: #839496;
+}
+
+/* ================================================================
    Requirement cards — "Your Dev Environment" slide
    ================================================================ */
 
