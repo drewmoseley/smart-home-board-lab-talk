@@ -110,6 +110,69 @@
 }
 
 /* ================================================================
+   Tips for Getting Started — horizontal timeline
+   ================================================================ */
+
+.tips-timeline {
+  position: relative;
+  margin: 5em 0 2em;
+}
+
+.tips-track {
+  position: absolute;
+  top: 30px;
+  left: 9%;
+  right: 9%;
+  height: 5px;
+  background: var(--toradex-blue);
+  z-index: 0;
+}
+
+.tips-items {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.tips-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 17%;
+  gap: 0.8em;
+}
+
+.tips-node {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--toradex-green);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1em;
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.tips-item strong {
+  display: block;
+  font-size: 1.0em;
+  color: var(--toradex-blue);
+  line-height: 1.3;
+}
+
+.tips-item span {
+  font-size: 0.85em;
+  color: #555;
+  line-height: 1.5;
+}
+
+/* ================================================================
    Simple Shell Glue slide
    ================================================================ */
 
