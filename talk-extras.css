@@ -101,6 +101,23 @@
 }
 
 /* ================================================================
+   Board Farm Controller slide
+   ================================================================ */
+
+img.bfc-hero-img {
+  width: 100% !important;
+  max-height: 60vh !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+#the-board-farm-controller .slide-col-left {
+  font-size: 1.15em;
+  line-height: 1.6;
+}
+
+/* ================================================================
    Hardware design slide
    ================================================================ */
 
