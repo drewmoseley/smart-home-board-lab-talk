@@ -30,7 +30,7 @@
     <p>Shift from interactive debugging to artifact review</p>
   </div>
 </div>
-<p class="slide-tagline">This talk is the how-to. Let's build it.</p>
+<p class="slide-tagline">This talk is the how-to. Here's how I built it.</p>
 <p class="slide-footnote"><sup>1</sup> embeddedrelated.com/showarticle/1782.php</p>
 ```
 

@@ -1,4 +1,4 @@
-## What We're Optimizing For
+## What I'm Optimizing For
 
 ```{=html}
 <div class="goal-grid">
