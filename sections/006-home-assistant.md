@@ -30,19 +30,6 @@ services:
 
 ---
 
-## Boards as First-Class Citizens
-
-- Expose board metrics via **MQTT** or REST → HA sensors
-- Track: CPU temp, load, memory, uptime, last-seen
-- Alert when a board goes silent (hung or powered off)
-- Dashboard view: which boards are alive right now
-
-::: notes
-Toradex boards running TorizonCore can publish MQTT metrics out of the box with a container. Raspberry Pi: same pattern with a small Python agent.
-:::
-
----
-
 ## Home Assistant Dashboard: Lab View
 
 ![Home Assistant lab dashboard — board power switches, recovery mode toggles, Tasmota energy monitoring](img/homeassistant.png)
