@@ -364,6 +364,71 @@ img.bfc-hero-img {
 }
 
 /* ================================================================
+   Next Steps slide
+   ================================================================ */
+
+.next-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.8em;
+  margin: 1.2em 0 0;
+  min-height: 58vh;
+}
+
+.next-card {
+  background: var(--toradex-grey);
+  border-top: 6px solid var(--toradex-blue);
+  border-radius: 0 0 8px 8px;
+  padding: 1.4em 1.4em 1.2em;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6em;
+}
+
+.next-logo-area {
+  height: 72px;
+  display: flex;
+  align-items: center;
+}
+
+.next-logo {
+  height: 64px !important;
+  width: auto !important;
+  max-width: 100% !important;
+  object-fit: contain !important;
+  display: block !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+.next-title {
+  font-size: 1.2em;
+  font-weight: 700;
+  color: var(--toradex-blue);
+}
+
+.next-desc {
+  font-size: 0.88em;
+  color: #555;
+  line-height: 1.55;
+  flex: 1;
+}
+
+.next-link {
+  font-size: 0.78em;
+  color: var(--toradex-blue);
+  text-decoration: none;
+  border-top: 1px solid #ddd;
+  padding-top: 0.6em;
+  margin-top: auto;
+  word-break: break-all;
+}
+
+.next-link:hover {
+  text-decoration: underline;
+}
+
+/* ================================================================
    "Back to 11 PM" — in practice closing slide
    ================================================================ */
 
