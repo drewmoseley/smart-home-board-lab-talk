@@ -7,6 +7,7 @@
 ## Your Dev Environment Shouldn't End at Your Desk
 
 ```{=html}
+<p class="hook-banner">It's 11pm. Your board is hung, SSH is dead, and you're not in the office. The right infrastructure makes that a 30-second fix — on a hobbyist budget.</p>
 <div class="req-grid">
   <div class="req-card">
     <span class="req-num">01</span>
@@ -34,6 +35,7 @@
 ```
 
 ::: notes
-Set expectations: this is a production setup I actually run, not a demo project.
-The blog post covers the "why" — this talk is the "how."
+Open with the 11pm scenario to set the stakes, then pivot to the four
+requirements this talk addresses. This is a production setup I actually run,
+not a demo project. The blog post covers the "why" — this talk is the "how."
 :::
