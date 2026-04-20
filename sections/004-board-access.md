@@ -19,93 +19,48 @@ Everything in this section runs on or through the Pi 5.
 
 ---
 
-## The Console You Can Always Reach
+## Serial Console Access
 
-SSH is convenient — until you break networking. Or the bootloader. Or the kernel.
-
-**Serial console (UART) survives all of that:**
-
-- Visible before the kernel starts
-- Visible when networking is down
-- Visible during a kernel panic
-- Visible when you accidentally `iptables -F DROP`
-
-> If you're changing bootloaders, kernels, initramfs, or networking,
-> you need a console that survives those changes.
-
-::: notes
-This is the single most important piece of infrastructure in the lab. Everything else is quality of life. This is correctness.
-:::
-
----
-
-## Hardware: USB Serial Adapters
+SSH breaks when networking, the kernel, or the bootloader breaks. **UART survives all of that.**
 
 :::: {.slide-columns}
 ::: {.slide-col-left}
-**What you need:**
+**Why serial:**
 
-- USB-to-UART adapter (CP2102, CH340, FTDI)
-- ~$5–10 each
-- Connect to board's UART TX/RX/GND pins
-- Plug into your lab server (Raspberry Pi, Proxmox host)
+- Visible before the kernel starts
+- Visible during a kernel panic
+- Visible when networking is down
 
-**Common boards:**
+**Hardware:** USB-to-UART adapter per board (CP2102, CH340, FTDI — ~$5–10 each)
 
-| Board | UART header |
-|---|---|
-| Toradex Verdin | X1 debug connector |
-| Raspberry Pi | GPIO 14/15 |
-| BeagleBone | J1 debug header |
+**Stable names via udev** — adapters get symlinks like `/dev/tty-verdin1` regardless of plug order
+
+**Remote access:** `serial-term` SSHes to the Pi 5 and launches picocom — works over VPN, no open TCP ports
 :::
 ::: {.slide-col-right}
 ::::: {.code-window}
 :::: {.code-window-titlebar}
-[]{.cw-dot .cw-red}[]{.cw-dot .cw-yellow}[]{.cw-dot .cw-green}[connect via minicom]{.cw-filename}
+[]{.cw-dot .cw-red}[]{.cw-dot .cw-yellow}[]{.cw-dot .cw-green}[99-serial-boards.rules]{.cw-filename}
 ::::
 
-~~~bash
-# Find the device
-ls /dev/ttyUSB* /dev/ttyACM*
-
-# Connect (115200 is the most common baud rate)
-minicom -D /dev/ttyUSB0 -b 115200
-
-# Or with screen
-screen /dev/ttyUSB0 115200
-
-# Or with picocom (no flow control)
-picocom -b 115200 --flow none /dev/ttyUSB0
+~~~
+SUBSYSTEM=="tty", \
+  ATTRS{idVendor}=="10c4", \
+  ATTRS{idProduct}=="ea60", \
+  ATTRS{serial}=="0001", \
+  SYMLINK+="tty-verdin1"
 ~~~
 
 :::::
-:::
-::::
 
----
-
-## Remote Serial: SSH + picocom
-
-No TCP port exposure needed — SSH into the board farm controller and run picocom directly.
-
-:::: {.slide-columns}
-::: {.slide-col-left}
-- `serial-term` on your workstation SSHes to the Pi 5
-- Runs `serial-term-local` on the controller
-- Pass a device name, or get a `dialog` menu of available ports
-- Works over VPN for truly remote access
-:::
-::: {.slide-col-right}
 ::::: {.code-window}
 :::: {.code-window-titlebar}
 []{.cw-dot .cw-red}[]{.cw-dot .cw-yellow}[]{.cw-dot .cw-green}[serial-term]{.cw-filename}
 ::::
 
 ~~~bash
-# Connect to a named board
+# Named board or interactive menu
 serial-term verdin-imx8mp
-
-# Or pick from a menu of available ports
 serial-term
 ~~~
 
@@ -113,33 +68,9 @@ serial-term
 :::
 ::::
 
----
-
-## Persistent Device Names with udev
-
-USB adapters enumerate as `/dev/ttyUSB0`, `/dev/ttyUSB1`… in plug-in order. That changes on reboot.
-
-::::: {.code-window}
-:::: {.code-window-titlebar}
-[]{.cw-dot .cw-red}[]{.cw-dot .cw-yellow}[]{.cw-dot .cw-green}[/etc/udev/rules.d/99-serial-boards.rules]{.cw-filename}
-::::
-
-~~~
-# Get idVendor/idProduct/serial from: udevadm info /dev/ttyUSB0
-SUBSYSTEM=="tty", \
-  ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", \
-  ATTRS{serial}=="0001", \
-  SYMLINK+="tty-toradex1"
-
-SUBSYSTEM=="tty", \
-  ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", \
-  ATTRS{serial}=="0002", \
-  SYMLINK+="tty-rpi4"
-~~~
-
-:::::
-
-Now `ser2net.yaml` references `/dev/tty-toradex1` — stable across reboots and replug.
+::: notes
+This is the single most important piece of infrastructure in the lab. Everything else is quality of life. This is correctness.
+:::
 
 ---
 
