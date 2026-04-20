@@ -1,0 +1,169 @@
+Thank you for joining my lightning talk about building a smart home board lab
+here at the Embedded Online Conference 2026. My name is Drew Moseley. I'd love
+to get feedback on this — there are lots of ways to get in touch with me listed
+at the bottom of the screen. Feel free to reach out if you have thoughts, ideas,
+or suggestions for making my smart home board lab better.
+
+I'll jump right in. I did write a blog post — there's a link to it at Embedded
+Related — that goes into more of the motivation for why you'd want to do this.
+If you're attending this talk, you're probably already familiar with the concept,
+so I won't spend a lot of time on the "why." But if you do want to read it, I
+highly encourage it.
+
+The point of this talk is really to be more of a how-to, going into the specific
+details of how I've addressed the various requirements: out-of-band console
+access, remote power control, the ability to reflash devices completely remotely,
+and things like logging and inspection.
+
+This setup is built for my needs specifically. A couple of things I was
+optimizing for: keeping it very low cost using maker-style hardware rather than
+high-end commercial equipment, and minimizing space. I'll show a picture in a
+moment, but I didn't want to go the route of a wall wart for every board —
+that takes up a lot of space.
+
+The scope for me is embedded Linux primarily. If you're working mostly with
+microcontroller boards, your mileage may vary on how much of this applies to
+you — but hopefully it gives you some inspiration and ideas.
+
+Just a quick system architecture overview — I'll go into the details as I work
+through the slides. Home Assistant, running on an Intel NUC-style system, is the
+central hub. It connects to relay boards running a firmware called Tasmota that
+control power to all the boards. Those relay boards can also put my Toradex
+boards into recovery mode, which allows them to be flashed from the Raspberry Pi
+5 you see here in the center. The Pi 5 is the component sitting at the top of my
+lab bench with physical connections to each board — USB serial, recovery mode
+USB, and so on. I've got a bit more complexity around video due to the nature of
+Toradex customer products, but I'll get into that.
+
+Moving to the board farm controller: this is a Raspberry Pi 5 — the physical hub
+of the lab. From this board I run a couple of USB hubs with a USB serial adapter
+for each target board. I did need to do some udev work to make sure all the USB
+serial adapters come up with known names. Many adapters have a vendor and device
+ID but not a unique serial number, so I had to jump through some hoops there.
+This is also the machine I SSH into to run scripts and invoke picocom.
+
+I chose a Raspberry Pi 5 because I had one. A mini PC can work just as well and
+will likely have more processing power — so if you have one available, don't
+hesitate to use it.
+
+Serial console access is probably the first thing you need to set up when
+dealing with remote embedded Linux boards. All of the kernel output goes to the
+serial port very early in boot — you can capture panic information, you don't
+need active networking, and it works before the kernel even starts. Most
+embedded Linux boards come with some kind of serial console, whether it's a
+USB-UART adapter or an old-school nine-pin serial port. They're easy and cheap
+to get hold of.
+
+As I mentioned, you need to do some udev work for stable device names. You can
+see here in 99-serial-boards.rules where I'm assigning a symlink based on a
+specific USB serial number, so I always know which adapter maps to which board.
+
+In some cases where boards don't have a serial number, I fall back to USB
+topology-based naming. That works, but if I unplug or replug anything, things
+can shift around. Since the Pi 5 is a fixed hub and I'm not generally
+hot-plugging devices, it's been stable enough for my purposes.
+
+I also have a wrapper script called serial-term. If I run it on the Pi 5 it
+invokes picocom directly; otherwise it SSHes into the Pi 5 and invokes picocom
+remotely. When I first set this up, everything was connected directly to my
+desktop, but I restructured it thinking these boards might eventually move out
+of my office — and the wrapper approach means the scripts work the same
+regardless of where I run them from.
+
+Display access is a bit more complicated, and it's largely driven by the nature
+of Toradex customer products. A lot of customers work on things with graphical
+interfaces — medical equipment, industrial robotics, manufacturing controls. So I
+work with a lot of display configurations: HDMI, LVDS, DSI. I haven't tackled
+remote access to LVDS or DSI, but HDMI is a fairly solved problem.
+
+The setup here: boards connect to a four-port KVM switch, along with USB for
+keyboard and mouse emulation. The output from that switch goes into a two-port
+HDMI splitter — one output to a physical monitor, the other to a PiKVM. This
+gives me remote display access to whichever board the switch is pointed at, from
+anywhere on the network. Fortunately the Toradex BSP makes it fairly easy to
+switch between display interfaces, so getting access over HDMI is generally
+sufficient for my needs.
+
+Now let me talk about how I actually power the boards. I use a small
+ESP8266-based relay board running a firmware called Tasmota. You can see the
+board here — it's a four-relay board with some additional GPIOs in the lower
+right corner. I use those extra GPIOs to put my Toradex boards into recovery
+mode.
+
+Recovery mode is how I reflash the firmware remotely. When the board boots in
+recovery mode, it comes up as a USB OTG device connected to the Pi 5, where I
+can use either the UUU utilities from NXP, or Toradex Easy Installer — TEZI —
+which is essentially a wrapper around those utilities.
+
+Tasmota gives me a nice web interface for controlling the board, and it also
+integrates with Home Assistant via MQTT auto-discovery. Each relay and GPIO shows
+up as a switch entity in Home Assistant. I have a wrapper script called
+ha-switch.sh that uses the Home Assistant API to control power and recovery mode
+from the command line or from other scripts.
+
+So why Home Assistant? If you're not familiar with it, it's an open-source smart
+home platform that integrates devices regardless of what protocol they speak into
+a single interface, with both a GUI and an API. I run it in Docker on my Intel
+NUC. Only a small portion of my Home Assistant setup is for the board farm, but
+as you can see in this dashboard, it gives me toggle switches for board power and
+recovery mode, some status indicators, and I can also monitor power consumption
+on my main build system. The most important piece for the board farm is simply
+the ability to toggle power and recovery mode remotely and programmatically.
+
+Stepping back to look at the broader lab setup: I mentioned the Intel NUC — it's
+always on and primarily hosts Docker containers. I do most of my work in
+containers there, which makes things easy to reproduce. Eventually I'd like to
+move it to an immutable system like the Fedora CoreOS-based distro I'm running
+on my Threadripper. That Threadripper is my main build machine — Yocto builds,
+CI runners, that sort of thing. It's not a direct part of the board farm, though
+I do have scripts for deploying builds from there to the Pi 5 for flashing. I've
+already talked about the Pi 5 and the PiKVM — those are the main pieces.
+
+Most of my scripts are flexible enough to run from any of these machines, so I
+don't have to think too hard about which one I'm on.
+
+Your setup will almost certainly look different — this is very specific to my
+Toradex workflow. The automations and workflows you need will drive most of your
+decisions. Also worth being clear: this is my personal development setup, not a
+replacement for Toradex's proper board farm with full automated testing and
+nightly CI/CD. What I'm doing is simple shell scripting — using ha-switch.sh to
+set recovery mode, power cycle the board, run TEZI via SSH to the Pi 5, then
+restore normal boot. The result is a fully reflashed device, as if I was sitting
+next to it.
+
+On the cost side: compared to enterprise lab equipment, the home lab alternative
+is dramatically cheaper. The mini PC was probably the most expensive single item,
+and the whole setup can come in well under five hundred dollars. If you've
+already got a spare machine sitting around, you may not need to spend anything.
+
+Wrapping up with a few tips for getting started: Start with Home Assistant — it's
+the center of everything. Add one Tasmota switch for one board outlet and get a
+feel for the workflow. Learn MQTT early — it's the integration layer that
+connects Home Assistant, Tasmota, and everything else. I run an MQTT broker on
+my Intel NUC, and that's how Home Assistant and Tasmota communicate. Add
+automations as you feel the pain, not before. And lean on the community — there
+is excellent support for all of these tools, which was a major reason I chose
+them.
+
+Beyond the core setup, there are a lot of directions you can take this:
+environmental monitoring, network isolation, UPS monitoring, MCU boards with
+JTAG, physical security cameras, full CI integration. I don't do most of these
+in my current setup, but the ecosystem makes it very straightforward to add them.
+
+So let me bring it back to where I started. It's 11pm. Something broke. A board
+didn't come back up after a CI run. Here's what happens now: Home Assistant shows
+the board is unresponsive. I tap the power switch — Tasmota cycles the relay.
+I watch the boot sequence on the serial console from the couch. The board comes
+back up, I re-queue the CI job, and I'm done in under a minute. That's what this
+setup buys you: problems solved without physical presence.
+
+Looking ahead, a few things I'm planning to add: a proper 10-inch rack, or a
+3D-printed option like the Lab Rax you see here. LabGrid, which is a more
+structured framework for lab resource management — it adds proper resource
+locking, a place/resource model, and better CI integration than my current shell
+scripts. And finally the Pengutronix USB SD Mux, which lets me switch an SD card
+between the host and a target board under software control — that closes the last
+gap for boards that boot from SD card, like Raspberry Pis.
+
+Thanks very much for watching. I hope this gives you some useful ideas for your
+own lab setup.
