@@ -1,8 +1,12 @@
+--- SLIDE: Title ---
+
 Thank you for joining my lightning talk about building a smart home board lab
 here at the Embedded Online Conference 2026. My name is Drew Moseley. I'd love
 to get feedback on this — there are lots of ways to get in touch with me listed
 at the bottom of the screen. Feel free to reach out if you have thoughts, ideas,
 or suggestions for making my smart home board lab better.
+
+--- NEXT SLIDE: Your Dev Environment Shouldn't End at Your Desk ---
 
 I'll jump right in. I did write a blog post — there's a link to it at Embedded
 Related — that goes into more of the motivation for why you'd want to do this.
@@ -15,15 +19,25 @@ details of how I've addressed the various requirements: out-of-band console
 access, remote power control, the ability to reflash devices completely remotely,
 and things like logging and inspection.
 
+--- NEXT SLIDE: What I'm Optimizing For ---
+
 This setup is built for my needs specifically. A couple of things I was
 optimizing for: keeping it very low cost using maker-style hardware rather than
-high-end commercial equipment, and minimizing space. I'll show a picture in a
-moment, but I didn't want to go the route of a wall wart for every board —
-that takes up a lot of space.
+high-end commercial equipment, and minimizing space.
 
 The scope for me is embedded Linux primarily. If you're working mostly with
 microcontroller boards, your mileage may vary on how much of this applies to
 you — but hopefully it gives you some inspiration and ideas.
+
+--- NEXT SLIDE: Self-Contained Board Units ---
+
+Here's what that looks like in practice. Rather than a wall wart for every
+board, each board lives in its own self-contained unit with a single power,
+ethernet, and USB connection to the outside world. Inside: the target board,
+the relay board, a USB hub, and buck converters all running off a single laptop
+power supply.
+
+--- NEXT SLIDE: System Architecture ---
 
 Just a quick system architecture overview — I'll go into the details as I work
 through the slides. Home Assistant, running on an Intel NUC-style system, is the
@@ -35,6 +49,8 @@ lab bench with physical connections to each board — USB serial, recovery mode
 USB, and so on. I've got a bit more complexity around video due to the nature of
 Toradex customer products, but I'll get into that.
 
+--- NEXT SLIDE: The Board Farm Controller ---
+
 Moving to the board farm controller: this is a Raspberry Pi 5 — the physical hub
 of the lab. From this board I run a couple of USB hubs with a USB serial adapter
 for each target board. I did need to do some udev work to make sure all the USB
@@ -45,6 +61,8 @@ This is also the machine I SSH into to run scripts and invoke picocom.
 I chose a Raspberry Pi 5 because I had one. A mini PC can work just as well and
 will likely have more processing power — so if you have one available, don't
 hesitate to use it.
+
+--- NEXT SLIDE: Serial Console Access ---
 
 Serial console access is probably the first thing you need to set up when
 dealing with remote embedded Linux boards. All of the kernel output goes to the
@@ -70,6 +88,8 @@ desktop, but I restructured it thinking these boards might eventually move out
 of my office — and the wrapper approach means the scripts work the same
 regardless of where I run them from.
 
+--- NEXT SLIDE: Display Access: HDMI Switch + PiKVM ---
+
 Display access is a bit more complicated, and it's largely driven by the nature
 of Toradex customer products. A lot of customers work on things with graphical
 interfaces — medical equipment, industrial robotics, manufacturing controls. So I
@@ -83,6 +103,8 @@ gives me remote display access to whichever board the switch is pointed at, from
 anywhere on the network. Fortunately the Toradex BSP makes it fairly easy to
 switch between display interfaces, so getting access over HDMI is generally
 sufficient for my needs.
+
+--- NEXT SLIDE: Power Control with Tasmota ---
 
 Now let me talk about how I actually power the boards. I use a small
 ESP8266-based relay board running a firmware called Tasmota. You can see the
@@ -101,14 +123,22 @@ up as a switch entity in Home Assistant. I have a wrapper script called
 ha-switch.sh that uses the Home Assistant API to control power and recovery mode
 from the command line or from other scripts.
 
+--- NEXT SLIDE: Why Home Assistant? ---
+
 So why Home Assistant? If you're not familiar with it, it's an open-source smart
 home platform that integrates devices regardless of what protocol they speak into
 a single interface, with both a GUI and an API. I run it in Docker on my Intel
-NUC. Only a small portion of my Home Assistant setup is for the board farm, but
-as you can see in this dashboard, it gives me toggle switches for board power and
+NUC.
+
+--- NEXT SLIDE: Home Assistant Dashboard: Lab View ---
+
+Only a small portion of my Home Assistant setup is for the board farm, but as
+you can see in this dashboard, it gives me toggle switches for board power and
 recovery mode, some status indicators, and I can also monitor power consumption
 on my main build system. The most important piece for the board farm is simply
 the ability to toggle power and recovery mode remotely and programmatically.
+
+--- NEXT SLIDE: My Lab Machines ---
 
 Stepping back to look at the broader lab setup: I mentioned the Intel NUC — it's
 always on and primarily hosts Docker containers. I do most of my work in
@@ -122,6 +152,8 @@ already talked about the Pi 5 and the PiKVM — those are the main pieces.
 Most of my scripts are flexible enough to run from any of these machines, so I
 don't have to think too hard about which one I'm on.
 
+--- NEXT SLIDE: Simple Shell Glue ---
+
 Your setup will almost certainly look different — this is very specific to my
 Toradex workflow. The automations and workflows you need will drive most of your
 decisions. Also worth being clear: this is my personal development setup, not a
@@ -131,10 +163,14 @@ set recovery mode, power cycle the board, run TEZI via SSH to the Pi 5, then
 restore normal boot. The result is a fully reflashed device, as if I was sitting
 next to it.
 
+--- NEXT SLIDE: Cost-Effective Alternatives ---
+
 On the cost side: compared to enterprise lab equipment, the home lab alternative
 is dramatically cheaper. The mini PC was probably the most expensive single item,
 and the whole setup can come in well under five hundred dollars. If you've
 already got a spare machine sitting around, you may not need to spend anything.
+
+--- NEXT SLIDE: Tips for Getting Started ---
 
 Wrapping up with a few tips for getting started: Start with Home Assistant — it's
 the center of everything. Add one Tasmota switch for one board outlet and get a
@@ -145,10 +181,14 @@ automations as you feel the pain, not before. And lean on the community — ther
 is excellent support for all of these tools, which was a major reason I chose
 them.
 
+--- NEXT SLIDE: Beyond the Core Setup ---
+
 Beyond the core setup, there are a lot of directions you can take this:
 environmental monitoring, network isolation, UPS monitoring, MCU boards with
 JTAG, physical security cameras, full CI integration. I don't do most of these
 in my current setup, but the ecosystem makes it very straightforward to add them.
+
+--- NEXT SLIDE: Back to 11 PM ---
 
 So let me bring it back to where I started. It's 11pm. Something broke. A board
 didn't come back up after a CI run. Here's what happens now: Home Assistant shows
@@ -157,6 +197,8 @@ I watch the boot sequence on the serial console from the couch. The board comes
 back up, I re-queue the CI job, and I'm done in under a minute. That's what this
 setup buys you: problems solved without physical presence.
 
+--- NEXT SLIDE: What's Next ---
+
 Looking ahead, a few things I'm planning to add: a proper 10-inch rack, or a
 3D-printed option like the Lab Rax you see here. LabGrid, which is a more
 structured framework for lab resource management — it adds proper resource
@@ -164,6 +206,8 @@ locking, a place/resource model, and better CI integration than my current shell
 scripts. And finally the Pengutronix USB SD Mux, which lets me switch an SD card
 between the host and a target board under software control — that closes the last
 gap for boards that boot from SD card, like Raspberry Pis.
+
+--- NEXT SLIDE: Thank You ---
 
 Thanks very much for watching. I hope this gives you some useful ideas for your
 own lab setup.
