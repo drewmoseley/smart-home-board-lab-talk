@@ -1,6 +1,6 @@
 % Building a Smart Home Board Lab
-% <img src="img/headshot.png" alt="Drew Moseley" class="headshot"><span><small>Presented by</small><strong>Drew Moseley</strong>Torizon Professional Services, Staff Developer — Toradex<br><small><img src="img/email.svg" class="contact-icon"> drew.moseley@toradex.com <img src="img/linkedin.svg" class="contact-icon"> /in/drewmoseley <img src="img/github.svg" class="contact-icon"> drewmoseley <img src="img/mastodon.svg" class="contact-icon"> @drewmoseley@fosstodon.org <img src="img/x.svg" class="contact-icon"> @drewmoseley</small></span>
-% Embedded Online Conference – May 11–15, 2026
+% <img src="img/headshot.png" alt="Drew Moseley" class="headshot"><span><small>Presented by</small><strong>Drew Moseley, Toradex</strong>Torizon Professional Services, Staff Developer — Toradex<br><small><img src="img/email.svg" class="contact-icon"> drew.moseley@toradex.com <img src="img/linkedin.svg" class="contact-icon"> /in/drewmoseley <img src="img/github.svg" class="contact-icon"> drewmoseley <img src="img/mastodon.svg" class="contact-icon"> @drewmoseley@fosstodon.org <img src="img/x.svg" class="contact-icon"> @drewmoseley</small></span>
+% www.embeddedonlineconference.com
 
 ---
 

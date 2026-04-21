@@ -2,12 +2,68 @@
    Loaded after infra/custom.css via the EXTRA_CSS mechanism. */
 
 /* ================================================================
+   Lato font family (matches EOC template)
+   ================================================================ */
+
+@font-face {
+  font-family: 'Lato';
+  src: url('fonts/Lato-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('fonts/Lato-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('fonts/Lato-Italic.ttf') format('truetype');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('fonts/Lato-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('fonts/Lato-BoldItalic.ttf') format('truetype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url('fonts/Lato-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+/* ================================================================
    Solarized Dark code block colors (overrides infra Monokai defaults)
+   EOC Template palette overrides
    ================================================================ */
 
 :root {
   --color-code-dark-bg: #002b36;
   --color-code-dark-fg: #839496;
+
+  /* EOC Template — replace Toradex blue with EOC primary blue.
+     All component borders, labels, and headings inherit this automatically.
+     --toradex-green kept for small decorative accents (non-strict compliance). */
+  --toradex-blue: #0D72B9;
+
+  /* Override reveal.js white theme fonts with Lato (matches EOC template) */
+  --r-main-font: 'Lato', sans-serif;
+  --r-heading-font: 'Lato', sans-serif;
 }
 
 /* ================================================================
@@ -500,21 +556,45 @@ img.bfc-hero-img {
 }
 
 /* ================================================================
-   Title slide
+   EOC Template chrome — content slides
+   ================================================================ */
+
+/* Remove missing background images (safe: other decks have their own
+   talk-extras.css and won't inherit this override). */
+.reveal .slides section {
+  background-image: none !important;
+}
+
+/* White background for all content slides */
+.reveal .slides section:not(#title-slide):not(.section-divider):not(.full-bg) {
+  background-color: #ffffff;
+}
+
+/* Full-bleed image slides: transparent so the data-background-image shows through */
+.reveal .slides section.full-bg {
+  background: transparent !important;
+}
+
+/* EOC: blue left-accent stripe beside the slide title */
+.reveal .slides section:not(#title-slide):not(.section-divider):not(.full-bg) h2 {
+  border-left: 8px solid var(--toradex-blue);
+  padding-left: 0.45em;
+}
+
+/* ================================================================
+   Title slide — EOC blue background, matching EOC template layout
+   All pixel positions derived from template percentages × 1920×1080:
+     logos    y=12.2%→132px  h=10.7%→116px  x=6.7%→129px
+     title    y=37.2%→402px
+     author   y=64.0%→691px  (dark oval pill, name only)
+     date     y=90.9%→982px  (URL-style small text, centered)
+   TITLE_LOGOS order: img/eoc-logo.png (1st) img/toradex-logo.png (2nd)
    ================================================================ */
 
 .reveal #title-slide {
-  background-color: white !important;
+  background-color: var(--toradex-blue) !important;
+  background-image: none !important;
   padding: 0 !important;
-}
-
-/* Green accent strip at bottom */
-.reveal #title-slide::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 18px;
-  background: var(--toradex-green);
 }
 
 /* Reset infra's 40% max-width on all children */
@@ -522,86 +602,105 @@ img.bfc-hero-img {
   max-width: none !important;
 }
 
-/* ---- Logo bar ---- */
+/* ---- Logos: side-by-side at template position, directly on blue ---- */
 .reveal #title-slide .title-logos {
   position: absolute !important;
-  top: 0; left: 0; right: 0;
+  top: 132px !important;
+  left: 129px !important;
+  right: auto !important;
   display: flex !important;
   align-items: center !important;
-  justify-content: flex-start !important;
-  padding: 16px 60px !important;
-  border-bottom: 1px solid #e0e0e0 !important;
-  margin-top: 0 !important;
-  box-sizing: border-box !important;
+  gap: 40px !important;
+  background: none !important;
+  border-bottom: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-.reveal #title-slide .title-logos img { height: 72px !important; width: auto !important; }
+.reveal #title-slide .title-logos img {
+  height: 116px !important;
+  width: auto !important;
+}
 
-/* ---- Main title ---- */
+/* EOC logo (1st): black+blue text on transparent — sits directly on blue bg */
+
+/* Toradex logo (2nd): white fill needed so it reads on blue */
+.reveal #title-slide .title-logos img:nth-child(2) {
+  background: white !important;
+  padding: 10px 20px !important;
+  border-radius: 6px !important;
+}
+
+/* ---- Title: large bold white, centered horizontally near vertical center ---- */
 .reveal #title-slide h1 {
   position: absolute !important;
-  top: 160px; left: 110px; right: 10%;
-  font-size: 2.8em !important;
-  font-weight: 700 !important;
-  line-height: 1.25 !important;
+  top: 430px !important;
+  left: 0 !important;
+  right: 0 !important;
+  font-size: 3.2em !important;
+  font-weight: 900 !important;
+  line-height: 1.2 !important;
   margin: 0 !important;
+  color: white !important;
+  text-align: center !important;
+  text-transform: none !important;
 }
 
-/* ---- Presenter block ---- */
+/* ---- Author: dark oval pill centered, close below title ---- */
 .reveal #title-slide p.author {
   position: absolute !important;
-  bottom: 90px; left: 110px;
-  display: flex !important;
-  align-items: center !important;
-  gap: 20px !important;
-  max-width: 85% !important;
-  font-size: 1.0em !important;
-  line-height: 1.6 !important;
-  color: var(--color-text) !important;
-  margin: 0 !important;
-}
-
-.reveal #title-slide p.author img.headshot {
-  width: 90px !important;
-  height: 90px !important;
-  border-radius: 50% !important;
-  object-fit: cover !important;
-  flex-shrink: 0 !important;
-}
-
-.reveal #title-slide p.author small small {
+  top: 620px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: block !important;
+  background: rgba(0, 0, 0, 0.82) !important;
+  border-radius: 999px !important;
+  padding: 22px 72px !important;
   white-space: nowrap !important;
-  display: block !important;
+  font-size: 1.0em !important;
+  line-height: 1 !important;
+  color: white !important;
+  margin: 0 !important;
+  text-align: center !important;
 }
 
-.reveal #title-slide p.author img.contact-icon {
-  width: 22px !important;
-  height: 22px !important;
-  border-radius: 0 !important;
-  object-fit: contain !important;
+/* Hide headshot photo in the pill */
+.reveal #title-slide p.author img.headshot {
+  display: none !important;
+}
+
+/* Suppress all text nodes in the span by zeroing font-size */
+.reveal #title-slide p.author > span {
+  font-size: 0 !important;
   display: inline !important;
-  vertical-align: middle !important;
-  margin: 0 4px 0 12px !important;
 }
 
-.reveal #title-slide p.author small {
-  display: block !important;
-  font-size: 0.75em !important;
-  color: #888 !important;
-  text-transform: uppercase !important;
-  letter-spacing: 0.05em !important;
+/* Show only the speaker name (strong) */
+.reveal #title-slide p.author > span > strong {
+  display: inline !important;
+  font-size: 28px !important;
+  font-weight: 300 !important;
+  color: white !important;
 }
 
-.reveal #title-slide p.author strong {
-  display: block !important;
-  font-size: 1.1em !important;
-  color: var(--toradex-blue) !important;
+/* Hide small tags, br, and contact icons */
+.reveal #title-slide p.author small,
+.reveal #title-slide p.author br,
+.reveal #title-slide p.author img.contact-icon {
+  display: none !important;
 }
 
+/* ---- Date: URL text centered at y=90.9%, matches template spc=600/sz=1200 ---- */
 .reveal #title-slide p.date {
   position: absolute !important;
-  bottom: 36px; left: 110px;
-  font-size: 0.85em !important;
-  color: #888 !important;
+  top: 982px !important;
+  left: 0 !important;
+  right: 0 !important;
+  text-align: center !important;
+  font-size: 0.75em !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.5em !important;
+  text-transform: none !important;
+  color: rgba(255, 255, 255, 0.85) !important;
   margin: 0 !important;
 }
