@@ -138,20 +138,6 @@ recovery mode, some status indicators, and I can also monitor power consumption
 on my main build system. The most important piece for the board farm is simply
 the ability to toggle power and recovery mode remotely and programmatically.
 
---- NEXT SLIDE: My Lab Machines ---
-
-Stepping back to look at the broader lab setup: I mentioned the Intel NUC — it's
-always on and primarily hosts Docker containers. I do most of my work in
-containers there, which makes things easy to reproduce. Eventually I'd like to
-move it to an immutable system like the Fedora CoreOS-based distro I'm running
-on my Threadripper. That Threadripper is my main build machine — Yocto builds,
-CI runners, that sort of thing. It's not a direct part of the board farm, though
-I do have scripts for deploying builds from there to the Pi 5 for flashing. I've
-already talked about the Pi 5 and the PiKVM — those are the main pieces.
-
-Most of my scripts are flexible enough to run from any of these machines, so I
-don't have to think too hard about which one I'm on.
-
 --- NEXT SLIDE: Simple Shell Glue ---
 
 Your setup will almost certainly look different — this is very specific to my
@@ -181,13 +167,6 @@ automations as you feel the pain, not before. And lean on the community — ther
 is excellent support for all of these tools, which was a major reason I chose
 them.
 
---- NEXT SLIDE: Beyond the Core Setup ---
-
-Beyond the core setup, there are a lot of directions you can take this:
-environmental monitoring, network isolation, UPS monitoring, MCU boards with
-JTAG, physical security cameras, full CI integration. I don't do most of these
-in my current setup, but the ecosystem makes it very straightforward to add them.
-
 --- NEXT SLIDE: Back to 11 PM ---
 
 So let me bring it back to where I started. It's 11pm. Something broke. A board
@@ -196,6 +175,34 @@ the board is unresponsive. I tap the power switch — Tasmota cycles the relay.
 I watch the boot sequence on the serial console from the couch. The board comes
 back up, I re-queue the CI job, and I'm done in under a minute. That's what this
 setup buys you: problems solved without physical presence.
+
+--- NEXT SLIDE: Thank You ---
+
+Thanks very much for watching. I hope this gives you some useful ideas for your
+own lab setup.
+
+--- BACKUP SLIDES ---
+
+--- NEXT SLIDE: My Lab Machines ---
+
+Stepping back to look at the broader lab setup: I mentioned the Intel NUC — it's
+always on and primarily hosts Docker containers. I do most of my work in
+containers there, which makes things easy to reproduce. Eventually I'd like to
+move it to an immutable system like the Fedora CoreOS-based distro I'm running
+on my Threadripper. That Threadripper is my main build machine — Yocto builds,
+CI runners, that sort of thing. It's not a direct part of the board farm, though
+I do have scripts for deploying builds from there to the Pi 5 for flashing. I've
+already talked about the Pi 5 and the PiKVM — those are the main pieces.
+
+Most of my scripts are flexible enough to run from any of these machines, so I
+don't have to think too hard about which one I'm on.
+
+--- NEXT SLIDE: Beyond the Core Setup ---
+
+Beyond the core setup, there are a lot of directions you can take this:
+environmental monitoring, network isolation, UPS monitoring, MCU boards with
+JTAG, physical security cameras, full CI integration. I don't do most of these
+in my current setup, but the ecosystem makes it very straightforward to add them.
 
 --- NEXT SLIDE: What's Next ---
 
@@ -206,8 +213,3 @@ locking, a place/resource model, and better CI integration than my current shell
 scripts. And finally the Pengutronix USB SD Mux, which lets me switch an SD card
 between the host and a target board under software control — that closes the last
 gap for boards that boot from SD card, like Raspberry Pis.
-
---- NEXT SLIDE: Thank You ---
-
-Thanks very much for watching. I hope this gives you some useful ideas for your
-own lab setup.

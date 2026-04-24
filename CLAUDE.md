@@ -23,7 +23,7 @@ cost-effective alternatives to lab equipment, next steps (LabGrid, SD Mux, rack)
 Audience: Embedded developers, home lab enthusiasts, anyone tired of manually
 power cycling boards.
 
-Format: 15-minute pre-recorded lightning talk (~13:30 estimated).
+Format: 10-minute pre-recorded lightning talk (target); 15 min slot confirmed ok.
 
 ---
 
@@ -40,14 +40,16 @@ sections/
   007-display-access.md        HDMI switch + PiKVM setup, SVG diagram
   008-tasmota.md               ESP8266 relay board, MQTT, recovery GPIO, ha-switch.sh
   009-home-assistant.md        Why HA + docker-compose snippet + dashboard screenshot
-  010-lab-machines.md          2×2 logo card grid: NUC, Threadripper, Pi5, PiKVM
-  011-shell-glue.md            flash-board script + 4 numbered step cards (2-col)
-  012-cost-effective.md        6-row comparison table vs enterprise alternatives
-  013-getting-started.md       5-step horizontal timeline
-  014-beyond-core.md           3×3 chip grid of extended capabilities
-  015-in-practice.md           "Back to 11 PM" — 4-step scenario callback
-  016-next-steps.md            3 cards: Lab Rax rack, LabGrid, Pengutronix USB SD Mux
-  017-thank-you.md             Thank-you + Toradex URLs
+  010-shell-glue.md            flash-board script + 4 numbered step cards (2-col)
+  011-cost-effective.md        6-row comparison table vs enterprise alternatives
+  012-getting-started.md       5-step horizontal timeline
+  013-in-practice.md           "Back to 11 PM" — 4-step scenario callback
+  014-thank-you.md             Thank-you + Toradex URLs
+  015-eoc-end.md               EOC closing template slide
+  --- BACKUP (after closing) ---
+  016-lab-machines.md          2×2 logo card grid: NUC, Threadripper, Pi5, PiKVM
+  017-beyond-core.md           3×3 chip grid of extended capabilities
+  018-next-steps.md            3 cards: Lab Rax rack, LabGrid, Pengutronix USB SD Mux
 
 img/
   headshot.png              speaker photo
@@ -108,13 +110,13 @@ The talk goes deeper on the HA/Tasmota/automation angle that the post introduces
 | `.goal-grid`, `.goal-card`, `.goal-label`, `.goal-desc` | 002 | 4-across goal tiles |
 | `.scope-note` | 002 | Highlighted scope callout |
 | `.slide-tagline` | 001 | Tagline text below grid |
-| `.machine-grid`, `.machine-card`, `.machine-name`, `.machine-role` | 010 | 2×2 logo cards |
-| `.shell-glue-columns`, `.shell-glue-codewindow`, `.shell-glue-steps` | 011 | 2-col shell glue layout |
-| `.shell-step`, `.shell-step-num` | 011 | Numbered step cards |
-| `.tips-timeline`, `.tips-track`, `.tips-items`, `.tips-item`, `.tips-node` | 013 | Horizontal timeline |
-| `.beyond-chips`, `.beyond-chip` | 014 | 3×3 chip/badge grid |
-| `.practice-steps`, `.practice-step`, `.practice-num`, `.practice-body`, `.practice-tool` | 015 | 4-step scenario layout |
-| `.next-grid`, `.next-card`, `.next-logo-area`, `.next-logo`, `.next-title`, `.next-desc`, `.next-link` | 016 | 3-card next steps layout |
+| `.machine-grid`, `.machine-card`, `.machine-name`, `.machine-role` | 016 | 2×2 logo cards |
+| `.shell-glue-columns`, `.shell-glue-codewindow`, `.shell-glue-steps` | 010 | 2-col shell glue layout |
+| `.shell-step`, `.shell-step-num` | 010 | Numbered step cards |
+| `.tips-timeline`, `.tips-track`, `.tips-items`, `.tips-item`, `.tips-node` | 012 | Horizontal timeline |
+| `.beyond-chips`, `.beyond-chip` | 017 | 3×3 chip/badge grid |
+| `.practice-steps`, `.practice-step`, `.practice-num`, `.practice-body`, `.practice-tool` | 013 | 4-step scenario layout |
+| `.next-grid`, `.next-card`, `.next-logo-area`, `.next-logo`, `.next-title`, `.next-desc`, `.next-link` | 018 | 3-card next steps layout |
 | `.bfc-hero-img` | 005 | RPi5 image sizing |
 | Solarized Dark CSS variable overrides | all code | Dark code block theme |
 | numberLines fixes | 011 | Line numbers inside dark box |
@@ -145,4 +147,4 @@ Always read from and write memory to `.claude/memory/MEMORY.md` and
 - `TITLE_LOGOS` in Makefile includes `img/toradex-logo.png` and `img/eoc-logo.png`.
 - All slide content uses first person ("I", "my") — never "we" or "let's".
 - `script.txt` in repo root is the corrected recording script (80-char line wrap).
-- Estimated talk duration: ~13:30 across 17 slides + title.
+- Target talk duration: ~10 min; main deck is 015 slides + title; 016–018 are backup slides after closing.
